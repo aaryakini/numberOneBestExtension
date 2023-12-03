@@ -1,0 +1,8 @@
+{
+    "manifest_version": 1,
+    "name": "Number One Best Extension",
+    "version": "1.0",
+    "host_permissions": [
+        "https://developer.chrome.com/*"
+      ]
+  }

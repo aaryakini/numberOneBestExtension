@@ -7,6 +7,9 @@ currentTime.textContent = timeString;
 
 let hoursWorking = document.getElementById('hoursWorking');
 
+
+// Timer code modified from — https://stackoverflow.com/questions/52912160/start-timer-when-window-load
+
 window.onload = () => {
     let hour = 0;
     let minute = 0;
@@ -24,3 +27,10 @@ window.onload = () => {
       hoursWorking.textContent = `${hour} hours and ${minute} minutes`;
     }
   }
+
+  const tabs = await chrome.tabs.query({
+    url: [
+      "https://developer.chrome.com/docs/webstore/*",
+      "https://developer.chrome.com/docs/extensions/*",
+    ],
+  });
