@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="lightMode.css">
+    <!-- <link rel="icon" type="image/x-icon" href="favicon.png"> -->
+    <script src="airtable.browser.js"></script>
+
+	<title>Light Mode</title>
+</head>
+<body>
+    <div class="header">
+        <div class="metrics">
+            <div class="box">
+                <div class="pins">
+                    <div class="pin"></div>
+                    <div class="pin"></div>
+                </div>
+                <p>Hello user! It is now <span id="currentTime">00:00 PM</span>.</p>
+            </div>
+            <div class="box">
+                <div class="pins">
+                    <div class="pin"></div>
+                    <div class="pin"></div>
+                </div>
+                <p>You have a total of <span id="tabCount">30 tabs</span> open right now.
+                    Want to go through them and remove any unnecessary ones?</p>
+            </div>
+            <div class="box">
+                <div class="pins">
+                    <div class="pin"></div>
+                    <div class="pin"></div>
+                </div>
+                <p>You have been working for <span id="hoursWorking">2 hours 40 minutes</span>. Good for you!</p>
+            </div>
+        </div>
+
+        <div class="clickies">
+            <a class="button" href="about.html">About</a>
+            <a class="button tooltip" href="about.html">Settings</a>
+        </div>
+    </div>
+
+    <div class="tabSection">
+        <p id="yourTabs">Your Tabs</p>
+        <div class="tabContainer">
+
+            <div id="template" class="tab">
+                <div class ="status idle"></div>
+                <p class="tabName">Sample Tabbelini</p>
+            </div>
+
+            <div class="tab">
+                <div class="status active"></div>
+                <p class="tabName">Sample Tabbelini</p>
+            </div>
+
+            <div class="tab">
+                <div class="status idle"></div>
+                <p class="tabName">Sample Tabbelini</p>
+            </div>
+
+            <div class="tab">
+                <div class="status idle"></div>
+                <p class="tabName">Sample Tabbelini</p>
+            </div>
+
+            <div class="tab">
+                <div class="status inactive"></div>
+                <p class="tabName">Sample Tabbelini</p>
+            </div>
+
+            <div class="tab">
+                <div class="status inactive"></div>
+                <p class="tabName">Sample Tabbelini</p>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- scriptssssssssss -->
+    <script type="text/javascript" src="lightMode.js"></script>
+</body>
+</html>
