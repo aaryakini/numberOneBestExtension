@@ -111,7 +111,7 @@ body {
     margin: 20px 0px;
   }
 
-  .tabContainer{
+  #tabContainer{
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;

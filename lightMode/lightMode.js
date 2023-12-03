@@ -28,9 +28,31 @@ window.onload = () => {
     }
   }
 
-  const tabs = await chrome.tabs.query({
-    url: [
-      "https://developer.chrome.com/docs/webstore/*",
-      "https://developer.chrome.com/docs/extensions/*",
-    ],
-  });
+  let allTabs = new Array();
+  chrome.tabs.query({}, function (tabs) {
+    for (let i = 0; i < tabs.length; i++) {
+        allTabs[i] = tabs[i];
+    }
+    // Moved code inside the callback handler
+    for (let i = 0; i < allTabs.length; i++) {
+        if (allTabs[i] != null)
+           window.console.log(allTabs[i].url);
+        else {
+            window.console.log("??" + i);
+        }
+        let templateCopy = template.cloneNode(true);
+        tabContainer.appendChild(templateCopy);
+        templateCopy.removeAttribute('id');
+        let tabName = allTabs[i].title;
+        let tabNameSlice = tabName.slice(0,30);
+        templateCopy.querySelector(".tabName").append(`${tabNameSlice}...`);
+    }
+});
+
+
+// to do:
+// periodic refresh with timer
+//link to tabs / click to close tabs
+//hover to show full name
+//update tabCounter
+//update status (active and discarded attributes of Tab object)
