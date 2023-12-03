@@ -9,7 +9,6 @@ let hoursWorking = document.getElementById('hoursWorking');
 
 
 // Timer code modified from — https://stackoverflow.com/questions/52912160/start-timer-when-window-load
-
 window.onload = () => {
     let hour = 0;
     let minute = 0;
@@ -27,32 +26,47 @@ window.onload = () => {
       hoursWorking.textContent = `${hour} hours and ${minute} minutes`;
     }
   }
+  // end of timer code
 
-  let allTabs = new Array();
+  let template = document.getElementById("template");
+  let tabContainer = document.getElementById("tabContainer");
+  let tabCount = document.getElementById("tabCount");
+
   chrome.tabs.query({}, function (tabs) {
+    //displaying total number of open tabs
+    tabCount.textContent = `${tabs.length} tabs`;
+
     for (let i = 0; i < tabs.length; i++) {
-        allTabs[i] = tabs[i];
+
+      //create new div for each tab + remove id attribute
+      let templateCopy = template.cloneNode(true);
+      tabContainer.appendChild(templateCopy);
+      templateCopy.removeAttribute('id');
+
+      //modifying properties of div
+      let tabName = tabs[i].title;
+      let tabNameSlice = tabName;
+      if (tabName.length > 25){
+        tabNameSlice = `${tabName.slice(0,25)}...`;
+      }
+      templateCopy.querySelector(".tabName").append(tabNameSlice);
+      templateCopy.querySelector(".tooltipText").append(tabName);
     }
-    // Moved code inside the callback handler
-    for (let i = 0; i < allTabs.length; i++) {
-        if (allTabs[i] != null)
-           window.console.log(allTabs[i].url);
-        else {
-            window.console.log("??" + i);
-        }
-        let templateCopy = template.cloneNode(true);
-        tabContainer.appendChild(templateCopy);
-        templateCopy.removeAttribute('id');
-        let tabName = allTabs[i].title;
-        let tabNameSlice = tabName.slice(0,30);
-        templateCopy.querySelector(".tabName").append(`${tabNameSlice}...`);
-    }
+
+    // //logging all tabs array items in console for cross-checking
+    // for (let i = 0; i < allTabs.length; i++) {
+    //     if (allTabs[i] != null)
+    //        window.console.log(allTabs[i].url);
+    //     else {
+    //         window.console.log("??" + i);
+    //     }
+    // }
 });
 
 
 // to do:
 // periodic refresh with timer
 //link to tabs / click to close tabs
-//hover to show full name
-//update tabCounter
+//hover to show full name — DONE
+//update tabCounter — DONE
 //update status (active and discarded attributes of Tab object)
