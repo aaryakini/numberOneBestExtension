@@ -46,6 +46,7 @@ window.onload = () => {
       //modifying properties of div
       let tabName = tabs[i].title;
       let tabNameSlice = tabName;
+      console.log(tabs[i].title);
       if (tabName.length > 25){
         tabNameSlice = `${tabName.slice(0,25)}...`;
       }
@@ -65,7 +66,7 @@ window.onload = () => {
 
 
 // to do:
-// periodic refresh with timer
+//periodic refresh with timer
 //link to tabs / click to close tabs
 //hover to show full name — DONE
 //update tabCounter — DONE
