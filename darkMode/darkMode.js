@@ -1,3 +1,4 @@
+// set current time
 const getCurrentTime = function() {
     let date = new Date();
     let hours = date.getHours();
@@ -9,13 +10,13 @@ const getCurrentTime = function() {
     minutes = minutes < 10 ? '0' + minutes : minutes;
 
     let currentTime = document.getElementById('current-time');
-    currentTime.innerText = `Hello, user. It is now ${hours + ':' + minutes + ' ' + newformat}.`
+    currentTime.innerText = `${hours + ':' + minutes + ' ' + newformat}`
     console.log(hours + ':' + minutes + ' ' + newformat);
 }
 
 getCurrentTime();
 
-
+// get chumboxes from Are.na API
 let chumboxes = document.querySelector('.chumboxes');
 
 const getChum = function() {
@@ -52,3 +53,37 @@ const getChum = function() {
 };
 
 getChum();
+
+//set 8 hour countdown
+
+function startTimer(duration, display) {
+    let timer = duration, hours, minutes, seconds;
+    setInterval(function () {
+        hours = parseInt(timer / 3600);
+        minutes = parseInt((timer % 3600) / 60);
+        seconds = parseInt(timer % 60);
+
+        hours = hours < 10 ? "0" + hours : hours;
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = hours + ':' + minutes + ":" + seconds;
+
+        if (--timer < 0) {
+            timer = duration;
+        }
+    }, 1000);
+}
+
+window.onload = function () {
+    let eightHours = 8 * 60 * 60 ,
+        display = document.querySelector('#hours-left');
+    startTimer(eightHours, display);
+};
+
+// get tab count from chrome.api 
+let tabCounter = document.getElementById("tab-counter");
+
+chrome.tabs.query({}, function (tabs) {
+    tabCounter.innerText = `${tabs.length} tabs`;
+});

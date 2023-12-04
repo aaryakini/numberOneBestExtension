@@ -2,6 +2,7 @@ body {
     background-color: black;
     color: white;
     font-weight: bold;
+    font-family: serif;
 }
 
 a, a:visited {

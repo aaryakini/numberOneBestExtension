@@ -8,5 +8,14 @@
     "host_permissions": [
         "http://*/*",
         "https://*/*"
-      ]
+      ], 
+    "permissions": [
+        "storage", 
+        "alarms", 
+        "notifications", 
+        "tabs"
+      ], 
+    "background": {
+        "service_worker": "background.js"
+    }
   }
