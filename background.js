@@ -1,10 +1,32 @@
+// let links = [
+//     "https://wikipedia.com"
+//     // "https://google.com",
+//     // "https://newyork.craigslist.org",
+//   ];
+
+//   function openRandomLink() {
+//     let i = Math.floor(Math.random() * links.length);
+//     let randomLink = links[i];
+  
+//     chrome.windows.create({ url: randomLink, type: "normal" });
+//   }
+
+//   chrome.runtime.onInstalled.addListener(function() {
+//     chrome.alarms.create("openLink", { periodInMinutes: 0.5 });
+//   });
+  
+//   chrome.alarms.onAlarm.addListener(function(alarm) {
+//     if (alarm.name === "openLink") {
+//       openRandomLink();
+//     }
+//   });
+
 // chrome.runtime.onInstalled.addListener(function() {
 //     chrome.alarms.create("openLink", { periodInMinutes: 0.5 });
 //   });
   
 //   chrome.alarms.onAlarm.addListener(function(alarm) {
 //     if (alarm.name === "openLink") {
-//       // Open a new window with the specified URL
 //       chrome.windows.create({ url: "https://wikipedia.com", type: "normal" });
 //     }
 //   });
