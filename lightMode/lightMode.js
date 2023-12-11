@@ -90,12 +90,6 @@ function chromeQuery(){
 }
 
 
-
-
-
-
-
-
 // console.log(tabList);
 // // console.clear();
 
