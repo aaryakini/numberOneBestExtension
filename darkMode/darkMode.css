@@ -20,7 +20,7 @@ a:hover {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  gap: 20px;
+  gap: 1vw;
   font-size: 1vw;
   position: fixed;
   text-shadow: 0 2px 3px rgba(1,0,1,1);
