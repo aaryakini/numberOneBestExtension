@@ -7,7 +7,6 @@ currentTime.textContent = timeString;
 
 let hoursWorking = document.getElementById('hoursWorking');
 
-
 // Timer code modified from — https://stackoverflow.com/questions/52912160/start-timer-when-window-load
 window.onload = () => {
   chromeQuery();
@@ -46,7 +45,7 @@ let tabCount = document.getElementById("tabCount");
 
 let queryInterval = null;
 
-queryInterval = setInterval(chromeQuery, 1000)
+queryInterval = setInterval(chromeQuery, 3000);
 
 function chromeQuery(){
   chrome.tabs.query({}, function (tabs) {
@@ -58,13 +57,14 @@ function chromeQuery(){
       //create new div for each tab + remove id attribute
       let templateCopy = template.cloneNode(true);
       tabContainer.appendChild(templateCopy);
+      templateCopy.classList.add('tab');
       templateCopy.removeAttribute('id');
       templateCopy.setAttribute('id', tabs[i].id);
   
       //modifying properties of div
       let tabName = tabs[i].title;
       let tabNameSlice = tabName;
-      console.log(tabs[i].title);
+      // console.log(tabs[i].title);
       if (tabName.length > 25){
         tabNameSlice = `${tabName.slice(0,25)}...`;
       }
@@ -72,11 +72,52 @@ function chromeQuery(){
       templateCopy.querySelector(".tooltipText").append(tabName);
     }
   });
+
+  let tabList = document.getElementsByClassName('tab');
+  console.log(tabList);
+  console.clear();
+
+  for (let i = 0; i < tabList.length; i++){
+    let id = tabList.item(i).getAttribute('id');
+    console.log(id);
+
+    tabList.item(i).onclick = function(){
+      chrome.tabs.remove(parseInt(id));
+      console.log('i tried!');
+    };
+  }
+
 }
 
-function closeTab(id){
-  chrome.tabs.remove(id)
-};
+
+
+
+
+
+
+
+// console.log(tabList);
+// // console.clear();
+
+// for (let i = 0; i < tabList.length; i++){
+//   let id = tabList.item(i).getAttribute('id');
+//   // console.log(id);
+//   let el = document.getElementById(id);
+//   // el.addEventListener('click', closeTab.bind(null, 'id'));
+//   el.addEventListener('click', closeTab().bind('null', id));
+//   // console.log(document.getElementById(id));
+// }
+
+// function closeTab(id){
+//   // let id = this.id;
+//   // this.id
+//   // closeId = parseInt(closeId);
+//   // console.log("closeId = " + closeId);
+//   // chrome.tabs.remove(closeId);
+//   // console.log("tried to close tab.");
+//   console.log("something was done!");
+//   // return chrome.tabs.remove(parseInt(id));
+// };
 
 // to do:
 //periodic refresh with timer — DONE (2 min intervals)
