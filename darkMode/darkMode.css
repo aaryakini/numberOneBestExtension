@@ -20,7 +20,7 @@ a:hover {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  gap: 1vw;
+  gap: 2vw;
   font-size: 1vw;
   position: fixed;
   text-shadow: 0 2px 3px rgba(1,0,1,1);
@@ -50,7 +50,7 @@ p {
   display: flex;
   flex-direction: column;
   font-size: 0.85vw;
-  padding: 10px;
+  padding: 0.6vw;
   box-shadow: 0 10px 20px rgba(0,0,0,.19), 0 6px 6px rgba(0,0,0,.23);
   -webkit-user-select: none;
   -ms-user-select: none;

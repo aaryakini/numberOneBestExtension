@@ -1,4 +1,25 @@
 body{
-    width: 400px;
-    height: 250px;
+    width: 12rem;
+    padding: 0.25em;
+    text-align: center;
+    font-size: 14px;
+}
+
+.button-wrapper {
+    padding-top: 8px;
+}
+
+button {
+    background-color: darkgray; 
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    padding-top:4px; 
+    padding-bottom: 4px;    
+    padding-left:6px; 
+    padding-right: 6px;
+    font-size: 14px;
+    border-radius: 2px;
 }

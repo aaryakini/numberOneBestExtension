@@ -61,16 +61,16 @@ let chumboxes = document.querySelector('.chumboxes');
         
         randomTop = getRandomNumber(7, 70);
         randomLeft = getRandomNumber(2, 80);
-        randomRot = getRandomNumber(-7.5, 7.5)
+        randomRot = getRandomNumber(-8.5, 8.5)
         chumbox.style.top = randomTop + "vh";
         chumbox.style.left = randomLeft + "vw";
         chumbox.style.transform = `rotate(${randomRot}deg)`;
 
         chumboxes.appendChild(chumbox); 
-        // window.open(link, '_blank',`toolbar=yes,scrollbars=yes,resizable=yes,top=${randomTop},left=${randomLeft},width=750,height=500`)
+        window.open(link, '_blank',`toolbar=yes,scrollbars=yes,resizable=yes,top=${randomTop},left=${randomLeft},width=750,height=500`)
 
     }  
-    setInterval(() => {printRandomBlock();}, 7500);
+    setInterval(() => {printRandomBlock();}, 5000);
 
 });
 
