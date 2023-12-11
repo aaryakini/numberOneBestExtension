@@ -13,49 +13,70 @@ const getCurrentTime = function() {
     currentTime.innerText = `${hours + ':' + minutes + ' ' + newformat}`
     console.log(hours + ':' + minutes + ' ' + newformat);
 }
-
 getCurrentTime();
+
+
 
 // get chumboxes from Are.na API
 let chumboxes = document.querySelector('.chumboxes');
 
-const getChum = function() {
     fetch('https://api.are.na/v2/channels/chum-vn3otwya0k8/contents?per=100')
     .then((response) => response.json())
     .then((data) => {
-  
+
     let blocks = data.contents;
+
+    function printRandomBlock() {
+        const i = Math.floor(Math.random() * blocks.length);
+        const randBlock = blocks[i];
+
+        let chumbox = document.createElement('div')
+        chumbox.setAttribute('id', 'chumbox' + i)
+        chumbox.className = 'chumbox';
     
-    for (let i = 0; i < blocks.length; i++) {
-    let link = blocks[i].description
-    let linkedImage = document.createElement('a')
-    linkedImage.setAttribute('id', 'linked-image')
+        let link = blocks[i].description
+        let linkedImage = document.createElement('a')
+        linkedImage.setAttribute('id', 'linked-image')
+    
+        let image = document.createElement('img');
+        image.setAttribute('id', 'image')
+        linkedImage.appendChild(image);
+    
+        const title = document.createElement('a');
+        image.src = blocks[i].image.display.url;
+        title.innerHTML = blocks[i].title;
+    
+        title.href = link;
+        linkedImage.href = link;
+        linkedImage.setAttribute('target', '_blank');
+    
+        chumbox.appendChild(linkedImage);
+        chumbox.appendChild(title);
+     
+        let winWidth = chumboxes.clientWidth;
+        let winHeight = chumboxes.clientHeight;
+        function getRandomNumber(min, max) { 
+            return Math.random() * (max - min) + min;   
+        }
+        
+        randomTop = getRandomNumber(7, 70);
+        randomLeft = getRandomNumber(2, 80);
+        randomRot = getRandomNumber(-7.5, 7.5)
+        chumbox.style.top = randomTop + "vh";
+        chumbox.style.left = randomLeft + "vw";
+        chumbox.style.transform = `rotate(${randomRot}deg)`;
 
-    let image = document.createElement('img');
-    image.setAttribute('id', 'image')
-    linkedImage.appendChild(image);
+        chumboxes.appendChild(chumbox); 
+        // window.open(link, '_blank',`toolbar=yes,scrollbars=yes,resizable=yes,top=${randomTop},left=${randomLeft},width=750,height=500`)
 
-    const title = document.createElement('a');
-    image.src = blocks[i].image.display.url;
-    title.innerHTML = blocks[i].title;
+    }  
+    setInterval(() => {printRandomBlock();}, 7500);
 
-    let chumbox = document.createElement('div')
-    chumbox.setAttribute('id', 'chumbox' + i)
-    chumbox.className = 'chumbox';
-    chumbox.appendChild(linkedImage);
-    chumbox.appendChild(title);
-    title.href = link;
-    linkedImage.href = link;
+});
 
-    chumboxes.appendChild(chumbox);
-    }
-    });
-};
 
-getChum();
-
-//set 8 hour countdown
-
+// set 8 hour countdown
+let newTime = localStorage.getItem("hoursLeft");
 function startTimer(duration, display) {
     let timer = duration, hours, minutes, seconds;
     setInterval(function () {
@@ -77,13 +98,22 @@ function startTimer(duration, display) {
 
 window.onload = function () {
     let eightHours = 8 * 60 * 60 ,
-        display = document.querySelector('#hours-left');
-    startTimer(eightHours, display);
+        display = document.querySelector('#hoursLeft');
+    let newTime = startTimer(eightHours, display);
+    localStorage.setItem("hoursLeft", hoursLeft);
 };
+
 
 // get tab count from chrome.api 
 let tabCounter = document.getElementById("tab-counter");
+let queryInterval = null;
+queryInterval = setInterval(chromeQuery, 1000)
 
-chrome.tabs.query({}, function (tabs) {
-    tabCounter.innerText = `${tabs.length} tabs`;
-});
+function chromeQuery(){
+  chrome.tabs.query({}, function (tabs) {
+    tabCounter.textContent = `${tabs.length} tabs`;
+  });
+}
+
+
+
