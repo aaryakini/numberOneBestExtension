@@ -13,8 +13,8 @@ const getCurrentTime = function() {
     currentTime.innerText = `${hours + ':' + minutes + ' ' + newformat}`
     console.log(hours + ':' + minutes + ' ' + newformat);
 }
-
 getCurrentTime();
+
 
 
 // get chumboxes from Are.na API
@@ -30,14 +30,11 @@ let chumboxes = document.querySelector('.chumboxes');
         const i = Math.floor(Math.random() * blocks.length);
         const randBlock = blocks[i];
 
-        console.log(randBlock);
-
         let chumbox = document.createElement('div')
         chumbox.setAttribute('id', 'chumbox' + i)
         chumbox.className = 'chumbox';
     
         let link = blocks[i].description
-        window.open(link, '_blank', 'popup')
         let linkedImage = document.createElement('a')
         linkedImage.setAttribute('id', 'linked-image')
     
@@ -51,20 +48,35 @@ let chumboxes = document.querySelector('.chumboxes');
     
         title.href = link;
         linkedImage.href = link;
+        linkedImage.setAttribute('target', '_blank');
     
         chumbox.appendChild(linkedImage);
         chumbox.appendChild(title);
-    
-        chumboxes.appendChild(chumbox);        
+     
+        let winWidth = chumboxes.clientWidth;
+        let winHeight = chumboxes.clientHeight;
+        function getRandomNumber(min, max) { 
+            return Math.random() * (max - min) + min;   
+        }
+        
+        randomTop = getRandomNumber(7, 70);
+        randomLeft = getRandomNumber(2, 80);
+        randomRot = getRandomNumber(-7.5, 7.5)
+        chumbox.style.top = randomTop + "vh";
+        chumbox.style.left = randomLeft + "vw";
+        chumbox.style.transform = `rotate(${randomRot}deg)`;
+
+        chumboxes.appendChild(chumbox); 
+        // window.open(link, '_blank',`toolbar=yes,scrollbars=yes,resizable=yes,top=${randomTop},left=${randomLeft},width=750,height=500`)
+
     }  
-    setInterval(() => {printRandomBlock();}, 18000);
+    setInterval(() => {printRandomBlock();}, 1000);
+
 });
 
 
-//set 8 hour countdown
-
-// chrome.storage.local.get[("hoursLeft")];
-
+// set 8 hour countdown
+let newTime = localStorage.getItem("hoursLeft");
 function startTimer(duration, display) {
     let timer = duration, hours, minutes, seconds;
     setInterval(function () {
@@ -88,22 +100,20 @@ window.onload = function () {
     let eightHours = 8 * 60 * 60 ,
         display = document.querySelector('#hoursLeft');
     let newTime = startTimer(eightHours, display);
-
-    // chrome.storage.local.setItem[("hoursLeft", newTime)];
+    localStorage.setItem("hoursLeft", hoursLeft);
 };
+
 
 // get tab count from chrome.api 
 let tabCounter = document.getElementById("tab-counter");
+let queryInterval = null;
+queryInterval = setInterval(chromeQuery, 1000)
 
-chrome.tabs.query({}, function (tabs) {
-    tabCounter.innerText = `${tabs.length} tabs`;
-});
+function chromeQuery(){
+  chrome.tabs.query({}, function (tabs) {
+    tabCounter.textContent = `${tabs.length} tabs`;
+  });
+}
 
 
-// let toggleSwitch = document.getElementById("toggle-switch");
-// let lightMode = window.open("lightMode/lightMode.html");
-// if (toggleSwitch.checked == true){
-//   lightMode;
-// } else {
 
-// };
