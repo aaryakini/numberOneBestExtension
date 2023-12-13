@@ -70,7 +70,7 @@ let chumboxes = document.querySelector('.chumboxes');
         window.open(link, '_blank',`toolbar=yes,scrollbars=yes,resizable=yes,top=${randomTop},left=${randomLeft},width=750,height=500`)
 
     }  
-    setInterval(() => {printRandomBlock();}, 5000);
+    setInterval(() => {printRandomBlock();}, 60000);
 
 });
 
